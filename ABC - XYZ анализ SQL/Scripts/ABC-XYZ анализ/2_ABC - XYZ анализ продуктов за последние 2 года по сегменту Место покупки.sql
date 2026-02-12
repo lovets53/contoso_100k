@@ -132,5 +132,7 @@ SELECT
 	xyz_score,
 	xyz_class
 FROM classified 
-JOIN product USING(productkey)
+JOIN product USING(productkey);
+
+
 
