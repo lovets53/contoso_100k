@@ -4,7 +4,7 @@ WITH last_date AS (
 	SELECT max(orderdate) AS last_date_sales FROM sales
 ),
 sales_data_ABC AS (
-    -- ШАГ 2: Собираем данные по выручке товаров
+    -- ШАГ 2: Собираем данные по выручке товаров за последние 2 года
     SELECT 
         productkey, 
         round(sum((unitprice - unitcost)*quantity/exchangerate),2) AS Gross_Margin_USD
@@ -20,12 +20,12 @@ cumulative_calc_ABC AS (
         productkey,
         Gross_Margin_USD,
         SUM(Gross_Margin_USD) OVER () AS total_Gross_Margin_USD, -- Общая выручка по всем товарам
-        SUM(Gross_Margin_USD) OVER (ORDER BY Gross_Margin_USD DESC) AS running_Gross_Margin_USD, -- Накопительная сумма (по умолчанию от сортировки)
+        SUM(Gross_Margin_USD) OVER (ORDER BY Gross_Margin_USD DESC) AS running_Gross_Margin_USD, -- Накопительная сумма 
         SUM(Gross_Margin_USD) OVER (ORDER BY Gross_Margin_USD DESC) / SUM(Gross_Margin_USD) OVER () AS cumulative_ratio -- Накопительная доля (кумулятивный процент)
     FROM sales_data_ABC
 ),
 sales_data_XYZ AS (
-	-- ШАГ 4: Собираем данные по количетву продаж по месяцам
+	-- ШАГ 4: Собираем данные по количеству продаж по месяцам за последние 2 года
 	SELECT
 		productkey,
 		DATE_TRUNC('month', orderdate) as month,
