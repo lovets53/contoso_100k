@@ -1,4 +1,4 @@
---title:Повторные покупки: количество клиентов и средний чек
+--title:Повторные покупки: количество клиентов, выручка когорты и средний чек
 SELECT 
 	cohort_year,
 	count(DISTINCT customerkey) AS customers_count,
