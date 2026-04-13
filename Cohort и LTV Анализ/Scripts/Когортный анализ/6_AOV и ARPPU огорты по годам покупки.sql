@@ -1,4 +1,4 @@
---title:AOV и ARPPU огорты по годам покупки
+--title:AOV и ARPPU когорты по годам покупки
 WITH cte AS (
 SELECT 
 	cohort_year,

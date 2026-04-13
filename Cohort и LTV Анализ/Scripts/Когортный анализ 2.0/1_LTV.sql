@@ -35,8 +35,9 @@ GROUP BY
 SELECT 
     cohort_year,
     lifetime_period,
-    SUM(period_profit) OVER(PARTITION BY cohort_year ORDER BY lifetime_period)  AS ltv_per_users
+    SUM(period_profit) OVER(PARTITION BY cohort_year ORDER BY lifetime_period)  AS ltv_total
 FROM cte
 ORDER BY 
     cohort_year,
     lifetime_period;
+
